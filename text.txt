@@ -1,0 +1,46 @@
+Hello World
+firstContainer.innerHTML = "Hello Aditya";
+"Hello Aditya"
+firstContainer.innerHTML = "<b>Hello Aditya you are bold now</b>";
+"<b>Hello Aditya you are bold now</b>"
+-------------------
+document.getElementsByTagName('h1')[0]
+<h1>​Welcome to my Javascript Tutorial​</h1>​
+-------------------
+document.getElementsByTagName('h1')[0].style.fontSize='99px'
+"99px"
+document.getElementsByTagName('h1')[0].style.fontSize='29px'
+"29px"
+document.getElementsByTagName('h1')[0].style.fontSize='39px'
+"39px"
+document.getElementsByTagName('h1')[0].style.background='red'
+"red"
+document.getElementsByTagName('h1')[0].style.visibility='hidden'
+"hidden"
+document.getElementsByTagName('h1')[0].style.display='none'
+"none"
+-------------------
+console.assert(4==6);
+VM758:1 Assertion failed: console.assert
+(anonymous) @ VM758:1
+undefined
+console.assert(4==4);
+undefined
+console.assert(4==(6-2));
+undefined
+console.assert(4==(6-3));
+VM796:1 Assertion failed: console.assert
+(anonymous) @ VM796:1
+undefined
+-------------------
+myArr.toString();
+"Aditya,Fan,Camera,34,,true"
+myArr.sort();
+(6) [34, "Aditya", "Camera", "Fan", null, true]
+-------------------
+-------------------
+-------------------
+-------------------
+-------------------
+-------------------
+-------------------
