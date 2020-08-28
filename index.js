@@ -188,10 +188,25 @@ d=myLovelyString.replace('Aditya','Abhishek');
 // console.log(d, myLovelyString);
 
 let myDate = new Date();
-console.log(myDate.getTime());
-console.log(myDate.getFullYear());
-console.log(myDate.getDay());
-console.log(myDate.getMinutes());
-console.log(myDate.getHours());
+// console.log(myDate.getTime());
+// console.log(myDate.getFullYear());
+// console.log(myDate.getDay());
+// console.log(myDate.getMinutes());
+// console.log(myDate.getHours());
 
-hello i love Aditya
+//DOM Manipulation
+let elem = document.getElementById('click');
+// console.log(elem);
+
+let elemClass = document.getElementsByClassName('container');
+// console.log(elemClass);
+// elemClass[0].style.background='yellow';//first element of container class
+elemClass[0].classList.add('bg-primary');//ading classes with properties according to us
+elemClass[0].classList.add('text-success');
+// console.log(elem.innerHTML);
+// console.log(elem.innerText);
+
+// console.log(elemClass[0].innerHTML);
+// console.log(elemClass[0].innerText);
+tn = document.getElementsByTagName('div');
+console.log(tn);
