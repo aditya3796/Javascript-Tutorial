@@ -209,4 +209,78 @@ elemClass[0].classList.add('text-success');
 // console.log(elemClass[0].innerHTML);
 // console.log(elemClass[0].innerText);
 tn = document.getElementsByTagName('div');
-console.log(tn);
+// console.log(tn);
+createdElement = document.createElement('p');
+createdElement.innerText = 'This is a created paragraph';
+tn[0].appendChild(createdElement);
+createdElement2 = document.createElement('b');
+createdElement2.innerText = 'This is a created bold';
+tn[0].replaceChild(createdElement2, createdElement);
+
+//selecting using query
+// sel = document.querySelector('.container');
+// console.log(sel);
+// sel=document.querySelectorAll('.container');
+// console.log(sel);
+
+
+// function clicked(){
+    // console.log('The button was clicked')
+// }
+// window.onload = function(){
+    // console.log('The document was loaded');
+// }
+// Events in JavaScript
+// firstContainer.addEventListener('click',function(){
+//     document.querySelectorAll('.container')[1].innerHTML = "<b> We have clicked </b>"
+//     console.log('Click on container');
+// })
+// firstContainer.addEventListener('mouseover',function(){
+//     console.log('Mouse on container');
+// })
+// firstContainer.addEventListener('mouseout',function(){
+//     console.log('Mouse out of container');
+// })
+
+// let prevHTML=document.querySelectorAll('.container')[1].innerHTML;
+// firstContainer.addEventListener('mouseup',function(){
+//     document.querySelectorAll('.container')[1].innerHTML=prevHTML;
+    // console.log('Mouse up when clicked on container');
+// })
+// firstContainer.addEventListener('mousedown',function(){
+//     document.querySelectorAll('.container')[1].innerHTML = "<b> We have clicked </b>"
+    // console.log('Mouse down when clicked container');
+// })
+
+// Arrow Functions
+// function summ(a,b){
+//     return a+b;
+// }
+summ = (a,b)=>{
+    return a+b;
+}
+
+logKaro = ()=>{
+    document.querySelectorAll('.container')[1].innerHTML="<b>Set timeout fired</b>"
+    console.log('I am your log');
+}
+//SetTimeout and setinterval
+// setTimeout(logKaro, 2000);
+// clr=setInterval(logKaro, 2000);
+// console.log(clr);//gives ID
+// use clearInterval(clr)/clearTimeout(clr) to cancel setInterval/setTimeout
+
+// JavaScript localStorage
+// localStorage.setItem('name','Aditya')
+// localStorage
+// localStorage.getItem('name');
+// localStorage.removeItem('name');
+// localStorage.clear();
+
+// Json
+// obj = {name: "Aditya", length: 1, a: {this:'tha"t'}}
+// jso = JSON.stringify(obj);//object is converted to JSON string
+// console.log(typeof jso);
+// console.log(jso);
+// parsed = JSON.parse(`{"name":"Aditya","length":1,"a":{"this":"that"}}`);//string to object
+// console.log(parsed);
