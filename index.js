@@ -242,15 +242,15 @@ tn[0].replaceChild(createdElement2, createdElement);
 //     console.log('Mouse out of container');
 // })
 
-// let prevHTML=document.querySelectorAll('.container')[1].innerHTML;
-// firstContainer.addEventListener('mouseup',function(){
-//     document.querySelectorAll('.container')[1].innerHTML=prevHTML;
-    // console.log('Mouse up when clicked on container');
-// })
-// firstContainer.addEventListener('mousedown',function(){
-//     document.querySelectorAll('.container')[1].innerHTML = "<b> We have clicked </b>"
-    // console.log('Mouse down when clicked container');
-// })
+let prevHTML=document.querySelectorAll('.container')[1].innerHTML;
+firstContainer.addEventListener('mouseup',function(){
+    document.querySelectorAll('.container')[1].innerHTML=prevHTML;
+    console.log('Mouse up when clicked on container');
+})
+firstContainer.addEventListener('mousedown',function(){
+    document.querySelectorAll('.container')[1].innerHTML = "<b> Ander </b>"
+    console.log('Mouse down when clicked container');
+})
 
 // Arrow Functions
 // function summ(a,b){
