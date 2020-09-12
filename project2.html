@@ -9,7 +9,6 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
     <title>TODOs List</title>
 </head>
 
@@ -53,6 +52,7 @@
     </nav>
     <div class="container">
         <h2 class="text-center my-4">TODOs List</h2>
+        <form>
             <div class="form-group">
                 <label for="title">Title</label>
                 <input type="text" class="form-control" id="title" aria-describedby="emailHelp">
@@ -66,29 +66,34 @@
               <input type="checkbox" class="form-check-input" id="exampleCheck1">
               <label class="form-check-label" for="exampleCheck1">Check me out</label>
             </div> -->
-            <button type="submit" id="add" class="btn btn-primary">Add to list</button>
-        
+            <button id="add" class="btn btn-primary">Add to List</button>
+        </form><br>
+        <button id="clear" class="btn btn-primary" onclick="clearStorage()">Clear List</button>
+
         <div id="items" class="my-4">
             <h2>Your Items</h2>
         </div>
-        <table class="table">
+        <table class="table" id="mytable">
             <thead>
-              <tr>
-                <th scope="col">SNo</th>
-                <th scope="col">Item Title</th>
-                <th scope="col">Item Description</th>
-                <th scope="col">Actions</th>
-              </tr>
+                <tr>
+                    <th scope="col">SNo</th>
+                    <th scope="col">Item Title</th>
+                    <th scope="col">Item Description</th>
+                    <th scope="col">Actions</th>
+                    <th scope="col">Completed</th>
+                </tr>
             </thead>
             <tbody id="tableBody">
-              <tr>
-                <th scope="row">1</th>
-                <td>Get some coffee</td>
-                <td>You need some coffee as you are a coder</td>
-                <td><button class="btn btn-sm btn-primary">Delete</button></td>
-              </tr>             
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Get some coffee</td>
+                    <td>You need some coffee as you are a coder</td>
+                    <td><button class="btn btn-sm btn-primary">Edit</button>
+                        <button class="btn btn-sm btn-primary">Delete</button></td>
+                    <td><input type="checkbox" class="form-check-input" id="exampleCheck1"></td>
+                </tr>
             </tbody>
-          </table>
+        </table>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
@@ -101,60 +106,120 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
         crossorigin="anonymous"></script>
-        <script>
-            function getAndUpdate(){
-                console.log("Updating List...");
-                tit = document.getElementById('title').value;
-                desc = document.getElementById('description').value;
-                if(localStorage.getItem('itemsJson')==null){
+    <script>
+        let tit;
+        let desc;
+        function getAndUpdate() {
+            console.log("Updating List...");
+            tit = document.getElementById('title').value;
+            desc = document.getElementById('description').value;
+            if (tit === "" || desc === "" || /^ /.test(tit) || /^ /.test(desc))//checking if your string starts with space
+            {
+                if (tit === "") {
+                    console.log(tit);
+                    alert("Title can't be blank");
+                }
+                if (desc === "") {
+                    console.log(desc);
+                    alert("Description can't be blank");
+                }
+                if (/^ /.test(tit)) {
+                    alert("Title first character can't be space");
+                }
+                if (/^ /.test(desc)) {
+                    alert("Description first character can't be space");
+                }
+            }
+            else {
+                if (localStorage.getItem('itemsJson') == null) {
                     itemJsonArray = [];
-                    itemJsonArray.push([tit,desc]);
+                    itemJsonArray.push([tit, desc]);
                     localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
                 }
-                else{
+                else {
                     itemJsonArrayStr = localStorage.getItem('itemsJson');
                     itemJsonArray = JSON.parse(itemJsonArrayStr);
-                    itemJsonArray.push([tit,desc]);
+                    itemJsonArray.push([tit, desc]);
                     localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
                 }
                 update();
             }
-            function update(){
-                if(localStorage.getItem('itemsJson')==null){
-                    itemJsonArray = [];
-                    localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
-                }
-                else{
-                    itemJsonArrayStr = localStorage.getItem('itemsJson');
-                    itemJsonArray = JSON.parse(itemJsonArrayStr);
-                }
-                //Populate the table
-                tableBody = document.getElementById("tableBody")
-                let str = "";
-                itemJsonArray.forEach((element,index) => {
-                    str += `
-                    <tr>
-                    <th scope="row">${index+1}</th>
-                    <td>${element[0]}</td>
-                    <td>${element[1]}</td>
-                    <td><button class="btn btn-sm btn-primary" onclick="deleted(${index+1})">Delete</button></td>
-                    </tr>`;
-                });
-                tableBody.innerHTML = str;
+        }
+        function update() {
+            if (localStorage.getItem('itemsJson') == null) {
+                itemJsonArray = [];
+                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
             }
-            add = document.getElementById("add");
-            add.addEventListener("click", getAndUpdate);
-            update();
-            function deleted(itemIndex){
-                console.log("Delete", itemIndex);
+            else {
                 itemJsonArrayStr = localStorage.getItem('itemsJson');
                 itemJsonArray = JSON.parse(itemJsonArrayStr);
-                //delete itemIndex element from the array
-                itemJsonArray.splice(itemIndex, 1);
-                localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            }
+            //Populate the table
+            tableBody = document.getElementById("tableBody");
+            let str = "";
+            itemJsonArray.forEach((element, index) => {
+                str += `
+                    <tr>
+                    <th scope="row">${index + 1}</th>
+                    <td>${element[0]}</td>
+                    <td>${element[1]}</td>
+                    <td><button class="btn btn-sm btn-primary" onclick="editing(${index})">Edit</button>
+                        <button class="btn btn-sm btn-primary" onclick="deleted(${index})">Delete</button></td>
+                    <td><input type="checkbox" class="form-check-input mx-4" id="${index}" onclick="completed(${index})" id="exampleCheck1"></td>    
+                    </tr>`;
+            });
+            tableBody.innerHTML = str;
+        }
+        add = document.getElementById("add");
+        add.addEventListener("click", getAndUpdate);
+        update();
+        function deleted(itemIndex) {
+            console.log("Delete", itemIndex);
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            //delete itemIndex element from the array
+            itemJsonArray.splice(itemIndex, 1);
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            update();
+        }
+        function editing(itemIndex) {
+            console.log('Editing', itemIndex);
+            let tit1 = prompt("Enter title", itemJsonArray[itemIndex][0]);
+            let desc1 = prompt("Enter description", itemJsonArray[itemIndex][1]);
+            itemJsonArrayStr = localStorage.getItem('itemsJson');
+            itemJsonArray = JSON.parse(itemJsonArrayStr);
+            //editing itemIndex element in the array
+            itemJsonArray.splice(itemIndex, 1, [tit1, desc1]);
+            localStorage.setItem('itemsJson', JSON.stringify(itemJsonArray));
+            update();
+        }
+        function completed(itemIndex) {
+            console.log("Completed", itemIndex);
+            let t1 = document.getElementById("mytable").rows[itemIndex + 1].cells[1].innerHTML;
+            let d1 = document.getElementById("mytable").rows[itemIndex + 1].cells[2].innerHTML;
+            let c1 = document.getElementById(itemIndex).checked;
+            console.log(t1 + " " + d1 + " " + c1);
+            if(document.getElementById(itemIndex).checked===true)
+            {
+                let temp=t1;
+                document.getElementById("mytable").rows[itemIndex + 1].cells[1].innerHTML=`<del>${temp}</del>`;
+            }                    
+            if(document.getElementById(itemIndex).checked===false)
+            {
+    
+                document.getElementById("mytable").rows[itemIndex + 1].cells[1].innerHTML=`<b>${t1}</b>`;
+                console.log(t1);
+            }
+        }
+        function clearStorage() {
+            // alert("Do you really want to clear the list?");
+            if (confirm("Do you really want to clear the list?")) {
+                console.log('Clearing the storage');
+                localStorage.clear();
                 update();
             }
-        </script>
+        }
+    </script>
 </body>
 
 </html>
