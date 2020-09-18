@@ -206,8 +206,7 @@
             }                    
             if(document.getElementById(itemIndex).checked===false)
             {
-    
-                document.getElementById("mytable").rows[itemIndex + 1].cells[1].innerHTML=`<b>${t1}</b>`;
+                document.getElementById("mytable").rows[itemIndex + 1].cells[1].innerHTML=t1.slice(5,-6);
                 console.log(t1);
             }
         }
@@ -221,5 +220,4 @@
         }
     </script>
 </body>
-
 </html>
